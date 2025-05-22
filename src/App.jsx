@@ -1,10 +1,20 @@
-import { Button } from "@/components/ui/button"
+import { SideBar } from "./components/SideBar/SideBar.jsx";
+import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+
 
 function App() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
+    <>
+      <SidebarProvider>
+        <SideBar />
+        <header>
+        </header>
+        <main>
+          <SidebarTrigger />
+          {/* components and its routes */}
+        </main>
+      </SidebarProvider>
+    </>
   )
 }
 
