@@ -1,4 +1,7 @@
+import { useContext } from "react";
 import { useLocation, NavLink } from "react-router";
+import { MoviesContext } from "../../contexts/MoviesContext";
+
 import {
     Sidebar, SidebarContent, SidebarGroup, SidebarMenu,
     SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenuItem,
@@ -44,10 +47,10 @@ const sidebarLinks = [
 const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi']
 
 export function SideBar() {
+    const { testValue } = useContext(MoviesContext);
     const location = useLocation();
 
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
-
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >

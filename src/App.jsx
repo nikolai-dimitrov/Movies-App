@@ -7,26 +7,29 @@ import { SignUp } from "./pages/SignUp";
 import { SideBar } from "./components/SideBar/SideBar.jsx";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 
+import { MoviesContextProvider } from "./contexts/MoviesContext";
+
 
 function App() {
   return (
     <>
-
-      <SidebarProvider>
-        <SideBar />
-        <header>
-        </header>
-        <main>
-          <SidebarTrigger />
-          <Routes>
-            <Route index element={<Home />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/my-movies" element={<MyMovies />} />
-            <Route path="/sign-in" element={<SignIn />} />
-            <Route path="/sign-up" element={<SignUp />} />
-          </Routes>
-        </main>
-      </SidebarProvider>
+      <MoviesContextProvider>
+        <SidebarProvider>
+          <SideBar />
+          <header>
+          </header>
+          <main>
+            <SidebarTrigger />
+            <Routes>
+              <Route index element={<Home />} />
+              <Route path="/about-us" element={<AboutUs />} />
+              <Route path="/my-movies" element={<MyMovies />} />
+              <Route path="/sign-in" element={<SignIn />} />
+              <Route path="/sign-up" element={<SignUp />} />
+            </Routes>
+          </main>
+        </SidebarProvider>
+      </MoviesContextProvider>
     </>
   )
 }
