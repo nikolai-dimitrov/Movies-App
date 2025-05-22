@@ -5,8 +5,8 @@ import {
     SidebarMenuButton, SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSubButton,
 
 } from "@/components/ui/sidebar";
-import { Input } from "@/components/ui/input"
-import { Calendar, Home, Inbox, Search } from "lucide-react"
+import { Input } from "@/components/ui/input";
+import { Calendar, Home, Inbox, Search } from "lucide-react";
 
 const sidebarLinks = [
     {
