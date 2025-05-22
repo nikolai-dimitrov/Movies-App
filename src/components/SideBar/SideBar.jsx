@@ -1,3 +1,4 @@
+import { useLocation } from "react-router";
 import {
     Sidebar, SidebarContent, SidebarGroup, SidebarMenu,
     SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenuItem,
@@ -10,47 +11,49 @@ import { Calendar, Home, Inbox, Search } from "lucide-react"
 const sidebarLinks = [
     {
         title: "Home",
-        url: "#",
+        url: "/",
         icon: Home,
     },
     {
         title: "About Us",
-        url: "#",
+        url: "/about-us",
         icon: Inbox,
     },
     {
         title: "My Movies",
-        url: "#",
+        url: "/my-movies",
         icon: Calendar,
     },
     {
         title: "Sign In",
-        url: "#",
+        url: "/sign-in",
         icon: Calendar,
     },
     {
         title: "Sign Up",
-        url: "#",
+        url: "/sign-up",
         icon: Calendar,
     },
     {
         title: "Logout",
-        url: "#",
+        url: "/logout",
         icon: Calendar,
     },
 ];
 
 const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi']
 
-
-
 export function SideBar() {
+    const location = useLocation();
+
+    const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
+    
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >
                 <SidebarMenuButton asChild>
                     <>
-                        <a href="/a" className="leading-none">
+                        <a href="/" className="leading-none">
                             <span className="text-[#ff0000] text-[40px] pl-2">M</span>
                             <span className="text-[#fff] text-2xl">ovies</span>
                         </a>
@@ -79,20 +82,23 @@ export function SideBar() {
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
-                    <SidebarGroupContent>
-                        <SidebarMenu className="text-[#6a6565]">
-                            <SidebarMenuItem>
-                                <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
-                                <SidebarMenuSub className="border-l-[#201d19]" onClick={(e) => console.log(e.target)}>
-                                    {sidebarGenres.map((genre) => (
-                                        <SidebarMenuSubItem key={genre} >
-                                            <SidebarMenuSubButton className="cursor-pointer">{genre}</SidebarMenuSubButton >
-                                        </SidebarMenuSubItem>
-                                    ))}
-                                </SidebarMenuSub>
-                            </SidebarMenuItem>
-                        </SidebarMenu>
-                    </SidebarGroupContent>
+                    {showGenresGroup &&
+                        <SidebarGroupContent>
+                            <SidebarMenu className="text-[#6a6565]">
+                                <SidebarMenuItem>
+                                    <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
+                                    <SidebarMenuSub className="border-l-[#201d19]" onClick={(e) => console.log(e.target)}>
+                                        {sidebarGenres.map((genre) => (
+                                            <SidebarMenuSubItem key={genre} >
+                                                <SidebarMenuSubButton className="cursor-pointer">{genre}</SidebarMenuSubButton >
+                                            </SidebarMenuSubItem>
+                                        ))}
+                                    </SidebarMenuSub>
+                                </SidebarMenuItem>
+                            </SidebarMenu>
+                        </SidebarGroupContent>
+                    }
+
                 </SidebarGroup>
             </SidebarContent>
         </Sidebar>
