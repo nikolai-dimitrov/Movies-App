@@ -1,4 +1,4 @@
-import { useLocation } from "react-router";
+import { useLocation, NavLink } from "react-router";
 import {
     Sidebar, SidebarContent, SidebarGroup, SidebarMenu,
     SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenuItem,
@@ -47,7 +47,7 @@ export function SideBar() {
     const location = useLocation();
 
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
-    
+
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >
@@ -72,10 +72,10 @@ export function SideBar() {
                             {sidebarLinks.map((item) => (
                                 <SidebarMenuItem key={item.title} className="text-[#6a6565]">
                                     <SidebarMenuButton asChild>
-                                        <a href={item.url}>
+                                        <NavLink to={item.url}>
                                             <item.icon />
                                             <span>{item.title}</span>
-                                        </a>
+                                        </NavLink>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
 

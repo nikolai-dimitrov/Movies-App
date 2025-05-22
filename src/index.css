@@ -244,3 +244,8 @@ body {
 	box-sizing: border-box;
 	scroll-behavior: smooth;
 }
+
+.active {
+	@apply bg-[#1c1814] text-white;
+	box-shadow: -3px 0px 0px -1px orange; /* #ff0000 */
+}
