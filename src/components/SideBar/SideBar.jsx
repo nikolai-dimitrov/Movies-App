@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useLocation, NavLink } from "react-router";
 import { MoviesContext } from "../../contexts/MoviesContext";
 
@@ -50,8 +50,15 @@ export function SideBar() {
     const { genre, setGenre } = useContext(MoviesContext);
     const location = useLocation();
 
+
+    useEffect(() => {
+        if (["/", "/my-movies"].includes(location.pathname)) {
+            setGenre('All')
+        }
+    }, [location.pathname])
+
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
-    console.log(genre)
+    
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >
