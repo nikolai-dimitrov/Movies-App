@@ -9,7 +9,7 @@ import {
 
 } from "@/components/ui/sidebar";
 import { Input } from "@/components/ui/input";
-import { Calendar, Home, Inbox, Search } from "lucide-react";
+import { Home, Search, BookOpenText, Clapperboard, LogIn, LogOut, UserRoundPlus, } from "lucide-react";
 
 const sidebarLinks = [
     {
@@ -20,27 +20,27 @@ const sidebarLinks = [
     {
         title: "About Us",
         url: "/about-us",
-        icon: Inbox,
+        icon: BookOpenText,
     },
     {
         title: "My Movies",
         url: "/my-movies",
-        icon: Calendar,
+        icon: Clapperboard,
     },
     {
         title: "Sign In",
         url: "/sign-in",
-        icon: Calendar,
+        icon: LogIn,
     },
     {
         title: "Sign Up",
         url: "/sign-up",
-        icon: Calendar,
+        icon: UserRoundPlus,
     },
     {
         title: "Logout",
         url: "/logout",
-        icon: Calendar,
+        icon: LogOut,
     },
 ];
 
@@ -55,10 +55,10 @@ export function SideBar() {
         if (["/", "/my-movies"].includes(location.pathname)) {
             setGenre('All')
         }
-    }, [location.pathname])
+    }, [location.pathname]);
 
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
-    
+
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >
@@ -89,7 +89,6 @@ export function SideBar() {
                                         </NavLink>
                                     </SidebarMenuButton>
                                 </SidebarMenuItem>
-
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
