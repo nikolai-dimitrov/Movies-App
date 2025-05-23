@@ -1,4 +1,4 @@
-import { useEffect, useContext } from "react";
+import { useEffect, useRef, useContext } from "react";
 import { useLocation, NavLink } from "react-router";
 import { MoviesContext } from "../../contexts/MoviesContext";
 
@@ -51,11 +51,12 @@ const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi']
 export function SideBar() {
     const { genre, setGenre } = useContext(MoviesContext);
     const location = useLocation();
-
+    const inputRef = useRef(null);
 
     useEffect(() => {
         if (["/", "/my-movies"].includes(location.pathname)) {
-            setGenre('All')
+            setGenre('All');
+            inputRef.current?.focus();
         }
     }, [location.pathname]);
 
@@ -79,8 +80,8 @@ export function SideBar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem className="mb-2 relative">
-                                <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
-                                <Input placeholder="Search Movies" className="border-hidden pl-8" />
+                                    <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
+                                    <Input ref={inputRef} placeholder="Search Movies" className="border-hidden pl-8" />
                             </SidebarMenuItem>
                             {sidebarLinks.map((item) => (
                                 <SidebarMenuItem key={item.title} className="text-[#6a6565]">
