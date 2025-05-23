@@ -72,9 +72,9 @@ export function SideBar() {
                 </SidebarMenuButton>
             </SidebarHeader>
             <SidebarContent className="bg-neutral-950 text-white">
+                <SidebarGroupLabel>Application</SidebarGroupLabel>
                 <SidebarGroup>
-                    <SidebarGroupLabel>Application</SidebarGroupLabel>
-                    <SidebarGroupContent className="mb-2">
+                    <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem className="relative">
                                 <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
@@ -92,6 +92,8 @@ export function SideBar() {
                             ))}
                         </SidebarMenu>
                     </SidebarGroupContent>
+                </SidebarGroup>
+                <SidebarGroup className="pl-0">
                     {showGenresGroup &&
                         <SidebarGroupContent>
                             <SidebarMenu className="text-[#6a6565]">
