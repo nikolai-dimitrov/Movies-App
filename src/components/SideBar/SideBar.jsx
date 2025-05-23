@@ -2,6 +2,8 @@ import { useEffect, useContext } from "react";
 import { useLocation, NavLink } from "react-router";
 import { MoviesContext } from "../../contexts/MoviesContext";
 
+import { motion, AnimatePresence } from "framer-motion";
+
 import {
     Sidebar, SidebarContent, SidebarGroup, SidebarMenu,
     SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenuItem,
@@ -76,7 +78,7 @@ export function SideBar() {
                 <SidebarGroup>
                     <SidebarGroupContent>
                         <SidebarMenu>
-                            <SidebarMenuItem className="relative">
+                            <SidebarMenuItem className="mb-2 relative">
                                 <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
                                 <Input placeholder="Search Movies" className="border-hidden pl-8" />
                             </SidebarMenuItem>
@@ -93,28 +95,39 @@ export function SideBar() {
                         </SidebarMenu>
                     </SidebarGroupContent>
                 </SidebarGroup>
-                <SidebarGroup className="pl-0">
+                <AnimatePresence>
                     {showGenresGroup &&
-                        <SidebarGroupContent>
-                            <SidebarMenu className="text-[#6a6565]">
-                                <SidebarMenuItem>
-                                    <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
-                                    <SidebarMenuSub className="border-l-[#201d19]">
-                                        {sidebarGenres.map((currentGenre) => (
-                                            <SidebarMenuSubItem
-                                                className={currentGenre == genre && "active"}
-                                                key={currentGenre}
-                                                onClick={() => setGenre(currentGenre)}
-                                            >
-                                                <SidebarMenuSubButton className="cursor-pointer">{currentGenre}</SidebarMenuSubButton >
-                                            </SidebarMenuSubItem>
-                                        ))}
-                                    </SidebarMenuSub>
-                                </SidebarMenuItem>
-                            </SidebarMenu>
-                        </SidebarGroupContent>
+                        <motion.div
+                            transition={{
+                                duration: 0.3
+                            }}
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                        >
+                            <SidebarGroup className="pl-0">
+                                <SidebarGroupContent>
+                                    <SidebarMenu className="text-[#6a6565]">
+                                        <SidebarMenuItem>
+                                            <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
+                                            <SidebarMenuSub className="border-l-[#201d19]">
+                                                {sidebarGenres.map((currentGenre) => (
+                                                    <SidebarMenuSubItem
+                                                        className={currentGenre == genre && "active"}
+                                                        key={currentGenre}
+                                                        onClick={() => setGenre(currentGenre)}
+                                                    >
+                                                        <SidebarMenuSubButton className="cursor-pointer">{currentGenre}</SidebarMenuSubButton >
+                                                    </SidebarMenuSubItem>
+                                                ))}
+                                            </SidebarMenuSub>
+                                        </SidebarMenuItem>
+                                    </SidebarMenu>
+                                </SidebarGroupContent>
+                            </SidebarGroup>
+                        </motion.div>
                     }
-                </SidebarGroup>
+                </AnimatePresence>
             </SidebarContent>
         </Sidebar >
     )
