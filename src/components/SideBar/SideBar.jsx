@@ -47,10 +47,11 @@ const sidebarLinks = [
 const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi']
 
 export function SideBar() {
-    const { testValue } = useContext(MoviesContext);
+    const { genre, setGenre } = useContext(MoviesContext);
     const location = useLocation();
 
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
+    console.log(genre)
     return (
         <Sidebar className="border-r-[#201d19]">
             <SidebarHeader className="bg-(--primary-bg-color)" >
@@ -90,10 +91,14 @@ export function SideBar() {
                             <SidebarMenu className="text-[#6a6565]">
                                 <SidebarMenuItem>
                                     <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
-                                    <SidebarMenuSub className="border-l-[#201d19]" onClick={(e) => console.log(e.target)}>
-                                        {sidebarGenres.map((genre) => (
-                                            <SidebarMenuSubItem key={genre} >
-                                                <SidebarMenuSubButton className="cursor-pointer">{genre}</SidebarMenuSubButton >
+                                    <SidebarMenuSub className="border-l-[#201d19]">
+                                        {sidebarGenres.map((currentGenre) => (
+                                            <SidebarMenuSubItem
+                                                className={currentGenre == genre && "active"}
+                                                key={currentGenre}
+                                                onClick={() => setGenre(currentGenre)}
+                                            >
+                                                <SidebarMenuSubButton className="cursor-pointer">{currentGenre}</SidebarMenuSubButton >
                                             </SidebarMenuSubItem>
                                         ))}
                                     </SidebarMenuSub>
@@ -101,9 +106,8 @@ export function SideBar() {
                             </SidebarMenu>
                         </SidebarGroupContent>
                     }
-
                 </SidebarGroup>
             </SidebarContent>
-        </Sidebar>
+        </Sidebar >
     )
 }

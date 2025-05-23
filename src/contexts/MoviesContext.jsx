@@ -1,10 +1,13 @@
-import { createContext } from "react";
+import { useState, createContext } from "react";
 
 export const MoviesContext = createContext();
 
 export const MoviesContextProvider = ({ children }) => {
+    const [genre, setGenre] = useState('All');
+
     const contextValues = {
-        testValue: 7,
+        genre,
+        setGenre,
     }
 
     return (

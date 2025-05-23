@@ -246,6 +246,6 @@ body {
 }
 
 .active {
-	@apply bg-[#1c1814] text-white;
+	@apply bg-[#1c1814] text-white rounded-sm;
 	box-shadow: -3px 0px 0px -1px orange; /* #ff0000 */
 }
