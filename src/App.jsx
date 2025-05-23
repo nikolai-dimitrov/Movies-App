@@ -19,7 +19,7 @@ function App() {
           <header>
           </header>
           <main>
-            <SidebarTrigger />
+            <SidebarTrigger variant="default" className="md:hidden size-11 cursor-pointer" />
             <Routes>
               <Route index element={<Home />} />
               <Route path="/about-us" element={<AboutUs />} />

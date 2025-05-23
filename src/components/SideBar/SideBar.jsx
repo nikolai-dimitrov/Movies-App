@@ -60,8 +60,8 @@ export function SideBar() {
     const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
 
     return (
-        <Sidebar className="border-r-[#201d19]">
-            <SidebarHeader className="bg-(--primary-bg-color)" >
+        <Sidebar className="border-r-[#201d19] sm:border-r-[#201d19]">
+            <SidebarHeader className="bg-(--primary-bg-color)">
                 <SidebarMenuButton asChild>
                     <>
                         <a href="/" className="leading-none">
