@@ -1,52 +1,12 @@
 import { useEffect, useRef, useContext } from "react";
-import { useLocation, NavLink } from "react-router";
+import { useLocation } from "react-router";
 import { MoviesContext } from "../../contexts/MoviesContext";
-
-import { motion, AnimatePresence } from "framer-motion";
+import { SideBarPagesGroup } from "./SideBarPagesGroup";
+import { SideBarGenresGroup } from "./SideBarGenresGroup";
 
 import {
-    Sidebar, SidebarContent, SidebarGroup, SidebarMenu,
-    SidebarHeader, SidebarGroupLabel, SidebarGroupContent, SidebarMenuItem,
-    SidebarMenuButton, SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSubButton,
-
+    Sidebar, SidebarContent, SidebarHeader, SidebarGroupLabel, SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { Input } from "@/components/ui/input";
-import { Home, Search, BookOpenText, Clapperboard, LogIn, LogOut, UserRoundPlus, } from "lucide-react";
-
-const sidebarLinks = [
-    {
-        title: "Home",
-        url: "/",
-        icon: Home,
-    },
-    {
-        title: "About Us",
-        url: "/about-us",
-        icon: BookOpenText,
-    },
-    {
-        title: "My Movies",
-        url: "/my-movies",
-        icon: Clapperboard,
-    },
-    {
-        title: "Sign In",
-        url: "/sign-in",
-        icon: LogIn,
-    },
-    {
-        title: "Sign Up",
-        url: "/sign-up",
-        icon: UserRoundPlus,
-    },
-    {
-        title: "Logout",
-        url: "/logout",
-        icon: LogOut,
-    },
-];
-
-const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi']
 
 export function SideBar() {
     const { genre, setGenre } = useContext(MoviesContext);
@@ -79,59 +39,8 @@ export function SideBar() {
             </SidebarHeader>
             <SidebarContent className="bg-neutral-950 text-white">
                 <SidebarGroupLabel>Application</SidebarGroupLabel>
-                <SidebarGroup>
-                    <SidebarGroupContent>
-                        <SidebarMenu>
-                            <SidebarMenuItem className="mb-2 relative">
-                                <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
-                                <Input ref={inputRef} placeholder="Search Movies" className="border-hidden pl-8" disabled={!isPageContainMovies} />
-                            </SidebarMenuItem>
-                            {sidebarLinks.map((item) => (
-                                <SidebarMenuItem key={item.title} className="text-[#6a6565]">
-                                    <SidebarMenuButton asChild>
-                                        <NavLink to={item.url}>
-                                            <item.icon />
-                                            <span>{item.title}</span>
-                                        </NavLink>
-                                    </SidebarMenuButton>
-                                </SidebarMenuItem>
-                            ))}
-                        </SidebarMenu>
-                    </SidebarGroupContent>
-                </SidebarGroup>
-                <AnimatePresence>
-                    {isPageContainMovies &&
-                        <motion.div
-                            transition={{
-                                duration: 0.3
-                            }}
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            exit={{ opacity: 0 }}
-                        >
-                            <SidebarGroup className="pl-0">
-                                <SidebarGroupContent>
-                                    <SidebarMenu className="text-[#6a6565]">
-                                        <SidebarMenuItem>
-                                            <SidebarGroupLabel className="text-white">Genres</SidebarGroupLabel>
-                                            <SidebarMenuSub className="border-l-[#201d19]">
-                                                {sidebarGenres.map((currentGenre) => (
-                                                    <SidebarMenuSubItem
-                                                        className={currentGenre == genre && "active"}
-                                                        key={currentGenre}
-                                                        onClick={() => setGenre(currentGenre)}
-                                                    >
-                                                        <SidebarMenuSubButton className="cursor-pointer">{currentGenre}</SidebarMenuSubButton >
-                                                    </SidebarMenuSubItem>
-                                                ))}
-                                            </SidebarMenuSub>
-                                        </SidebarMenuItem>
-                                    </SidebarMenu>
-                                </SidebarGroupContent>
-                            </SidebarGroup>
-                        </motion.div>
-                    }
-                </AnimatePresence>
+                <SideBarPagesGroup inputRef={inputRef} isPageContainMovies={isPageContainMovies} />
+                <SideBarGenresGroup isPageContainMovies={isPageContainMovies} genre={genre} setGenre={setGenre} />
             </SidebarContent>
         </Sidebar >
     )
