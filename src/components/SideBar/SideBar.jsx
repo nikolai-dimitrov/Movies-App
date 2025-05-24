@@ -58,9 +58,12 @@ export function SideBar() {
             setGenre('All');
             inputRef.current?.focus();
         }
+
+        inputRef.current.value = '';
+
     }, [location.pathname]);
 
-    const showGenresGroup = location.pathname == "/" || location.pathname == "/my-movies";
+    const isPageContainMovies = location.pathname == "/" || location.pathname == "/my-movies";
 
     return (
         <Sidebar className="border-r-[#201d19] sm:border-r-[#201d19]">
@@ -80,8 +83,8 @@ export function SideBar() {
                     <SidebarGroupContent>
                         <SidebarMenu>
                             <SidebarMenuItem className="mb-2 relative">
-                                    <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
-                                    <Input ref={inputRef} placeholder="Search Movies" className="border-hidden pl-8" />
+                                <Search className="absolute top-[50%] left-[7px] translate-y-[-50%] text-[#6a6565]" size={20} />
+                                <Input ref={inputRef} placeholder="Search Movies" className="border-hidden pl-8" disabled={!isPageContainMovies} />
                             </SidebarMenuItem>
                             {sidebarLinks.map((item) => (
                                 <SidebarMenuItem key={item.title} className="text-[#6a6565]">
@@ -97,7 +100,7 @@ export function SideBar() {
                     </SidebarGroupContent>
                 </SidebarGroup>
                 <AnimatePresence>
-                    {showGenresGroup &&
+                    {isPageContainMovies &&
                         <motion.div
                             transition={{
                                 duration: 0.3
