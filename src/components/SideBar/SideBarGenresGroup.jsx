@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import {
@@ -9,8 +10,8 @@ import {
 const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi'];
 
 
-
-export const SideBarGenresGroup = ({ isPageContainMovies, genre, setGenre }) => {
+// Using memo to prevent unnecessary re-renders when movie context changes in parent component -> Sidebar.
+export const SideBarGenresGroup = memo(({ isPageContainMovies, genre, setGenre }) => {
     return (
         <AnimatePresence>
             {isPageContainMovies &&
@@ -46,4 +47,4 @@ export const SideBarGenresGroup = ({ isPageContainMovies, genre, setGenre }) => 
             }
         </AnimatePresence>
     )
-}
+})
