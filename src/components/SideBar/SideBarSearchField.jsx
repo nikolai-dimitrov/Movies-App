@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useContext } from "react";
 
-import { MoviesContext } from "../../contexts/MoviesContext";
-import { useDebounce } from "../../hooks/useDebounce"
+import { MoviesQueryContext } from "../../contexts/MoviesQueryContext";
+import { useDebounce } from "../../hooks/useDebounce";
 
 import { SidebarMenuItem } from "@/components/ui/sidebar";
 import { Search } from "lucide-react";
@@ -11,7 +11,7 @@ export const SideBarSearchField = ({ isPageContainMovies, pathname }) => {
     const [inputValue, setInputValue] = useState("");
     const [debounceInputValue] = useDebounce(inputValue, 500);
     const inputRef = useRef(null);
-    const { setSearchedMovieTitle } = useContext(MoviesContext);
+    const { setSearchedMovieTitle } = useContext(MoviesQueryContext);
 
     useEffect(() => {
         if (["/", "/my-movies"].includes(pathname)) {

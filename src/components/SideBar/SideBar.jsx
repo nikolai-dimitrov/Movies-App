@@ -1,6 +1,6 @@
 import { useEffect, useContext } from "react";
 import { useLocation } from "react-router";
-import { MoviesContext } from "../../contexts/MoviesContext";
+import { MoviesQueryContext } from "../../contexts/MoviesQueryContext";
 import { SideBarPagesGroup } from "./SideBarPagesGroup";
 import { SideBarGenresGroup } from "./SideBarGenresGroup";
 
@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/sidebar";
 
 export function SideBar() {
-    const { genre, setGenre } = useContext(MoviesContext);
+    const { genre, setGenre } = useContext(MoviesQueryContext);
     const location = useLocation();
 
     useEffect(() => {
