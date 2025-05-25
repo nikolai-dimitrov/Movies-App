@@ -1,28 +1,34 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+
+import { MoviesContext } from "../../contexts/MoviesContext";
+import { useDebounce } from "../../hooks/useDebounce"
 
 import { SidebarMenuItem } from "@/components/ui/sidebar";
 import { Search } from "lucide-react";
 import { Input } from "@/components/ui/input";
 
-
-
 export const SideBarSearchField = ({ isPageContainMovies, pathname }) => {
     const [inputValue, setInputValue] = useState("");
+    const [debounceInputValue] = useDebounce(inputValue, 500);
     const inputRef = useRef(null);
+    const { setSearchedMovieTitle } = useContext(MoviesContext);
 
     useEffect(() => {
         if (["/", "/my-movies"].includes(pathname)) {
             inputRef.current?.focus();
 
         }
-
-        setInputValue((inputValue) => "");
+        setInputValue((inputValue) => inputValue = "");
 
     }, [pathname]);
 
+    useEffect(() => {
+        setSearchedMovieTitle((movieTitle) => movieTitle = debounceInputValue);
+    }, [debounceInputValue]);
+
 
     const changeInputHandler = (e) => {
-        setInputValue((inputValue) => inputValue = e.target.value)
+        setInputValue((inputValue) => inputValue = e.target.value);
     };
 
     return (
