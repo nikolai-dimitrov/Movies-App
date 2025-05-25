@@ -3,15 +3,14 @@ import { useState, useEffect, createContext } from "react";
 
 export const MoviesContext = createContext();
 
-export const MoviesContextProvider = ({ children, genre }) => {
-    // const {} = useContext
+export const MoviesContextProvider = ({ children, genre, searchedMovieTitle }) => {
     const [movies, setMovies] = useState([]);
 
-    console.log(genre)
     useEffect(() => {
         // TODO: fetch on title or genre change
+        // console.log('fetch')
 
-    }, [])  // searchedMovieTitle, genre
+    }, [searchedMovieTitle, genre])
 
     const contextValues = {
         movies,
