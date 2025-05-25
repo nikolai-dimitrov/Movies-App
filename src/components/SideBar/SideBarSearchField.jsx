@@ -13,6 +13,7 @@ export const SideBarSearchField = ({ isPageContainMovies, pathname }) => {
     const inputRef = useRef(null);
     const { setSearchedMovieTitle } = useContext(MoviesQueryContext);
 
+    // Clear input on page change and focus input if page contain movies.
     useEffect(() => {
         if (["/", "/my-movies"].includes(pathname)) {
             inputRef.current?.focus();
@@ -22,6 +23,7 @@ export const SideBarSearchField = ({ isPageContainMovies, pathname }) => {
 
     }, [pathname]);
 
+    // set debounced value into movie context
     useEffect(() => {
         setSearchedMovieTitle((movieTitle) => movieTitle = debounceInputValue);
     }, [debounceInputValue]);
