@@ -1,4 +1,4 @@
-import { memo } from "react";
+import { useEffect, useContext } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import {
@@ -6,12 +6,21 @@ import {
     SidebarMenuItem, SidebarMenuSub, SidebarMenuSubItem, SidebarMenuSubButton,
 
 } from "@/components/ui/sidebar";
+import { MoviesQueryContext } from "../../contexts/MoviesQueryContext";
 
 const sidebarGenres = ['All', 'Action', 'Thriller', 'Fantasy', 'Sci Fi'];
 
 
-// Using memo to prevent unnecessary re-renders when movie context changes in parent component -> Sidebar.
-export const SideBarGenresGroup = memo(({ isPageContainMovies, genre, setGenre }) => {
+export const SideBarGenresGroup = ({ isPageContainMovies, pathname }) => {
+    const { genre, setGenre } = useContext(MoviesQueryContext);
+
+    useEffect(() => {
+        if (["/", "/my-movies"].includes(pathname)) {
+            setGenre('All');
+        }
+
+    }, [pathname]);
+
     return (
         <AnimatePresence>
             {isPageContainMovies &&
@@ -47,4 +56,4 @@ export const SideBarGenresGroup = memo(({ isPageContainMovies, genre, setGenre }
             }
         </AnimatePresence>
     )
-})
+}
