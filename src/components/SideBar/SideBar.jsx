@@ -1,4 +1,4 @@
-import { useEffect, useRef, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { useLocation } from "react-router";
 import { MoviesContext } from "../../contexts/MoviesContext";
 import { SideBarPagesGroup } from "./SideBarPagesGroup";
@@ -11,15 +11,11 @@ import {
 export function SideBar() {
     const { genre, setGenre } = useContext(MoviesContext);
     const location = useLocation();
-    const inputRef = useRef(null);
 
     useEffect(() => {
         if (["/", "/my-movies"].includes(location.pathname)) {
             setGenre('All');
-            inputRef.current?.focus();
         }
-
-        inputRef.current.value = '';
 
     }, [location.pathname]);
 
@@ -39,7 +35,7 @@ export function SideBar() {
             </SidebarHeader>
             <SidebarContent className="bg-neutral-950 text-white">
                 <SidebarGroupLabel>Application</SidebarGroupLabel>
-                <SideBarPagesGroup inputRef={inputRef} isPageContainMovies={isPageContainMovies} />
+                <SideBarPagesGroup isPageContainMovies={isPageContainMovies} pathname={location.pathname} />
                 <SideBarGenresGroup isPageContainMovies={isPageContainMovies} genre={genre} setGenre={setGenre} />
             </SidebarContent>
         </Sidebar >

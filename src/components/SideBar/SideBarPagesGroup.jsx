@@ -42,12 +42,12 @@ const sidebarLinks = [
     },
 ];
 // Using memo to prevent unnecessary re-render when genre changes. Without memo when genre is changed movie context will force side bar re-render, and side bar will re-render its children,
-export const SideBarPagesGroup = memo(({ inputRef, isPageContainMovies }) => {
+export const SideBarPagesGroup = memo(({ isPageContainMovies, pathname }) => {
     return (
         <SidebarGroup>
             <SidebarGroupContent>
                 <SidebarMenu>
-                    <SideBarSearchField inputRef={inputRef} isPageContainMovies={isPageContainMovies} />
+                    <SideBarSearchField isPageContainMovies={isPageContainMovies} pathname={pathname} />
                     {sidebarLinks.map((item) => (
                         <SidebarMenuItem key={item.title} className="text-[#6a6565]">
                             <SidebarMenuButton asChild>
