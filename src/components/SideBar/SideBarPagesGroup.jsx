@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { NavLink } from "react-router";
 
 import { SideBarSearchField } from "./SideBarSearchField";
@@ -41,8 +40,7 @@ const sidebarLinks = [
         icon: LogOut,
     },
 ];
-// Using memo to prevent unnecessary re-render when genre changes. Without memo when genre is changed movie context will force side bar re-render, and side bar will re-render its children,
-export const SideBarPagesGroup = memo(({ isPageContainMovies, pathname }) => {
+export const SideBarPagesGroup = ({ isPageContainMovies, pathname }) => {
     return (
         <SidebarGroup>
             <SidebarGroupContent>
@@ -62,4 +60,4 @@ export const SideBarPagesGroup = memo(({ isPageContainMovies, pathname }) => {
             </SidebarGroupContent>
         </SidebarGroup>
     )
-})
+}
